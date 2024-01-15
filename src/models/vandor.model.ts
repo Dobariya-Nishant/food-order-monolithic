@@ -1,6 +1,6 @@
 import { Document, Schema, SchemaTypes, model } from "mongoose";
 
-interface VandorDoc extends Document {
+export interface VandorDoc extends Document {
   name: string;
   ownerName: string;
   foodType: [string];
@@ -27,7 +27,7 @@ const vandorShcema = new Schema(
       required: true,
     },
     foodType: {
-      type: String,
+      type: [String],
       required: true,
     },
     pincode: {
@@ -74,6 +74,15 @@ const vandorShcema = new Schema(
     },
   },
   {
+    toJSON: {
+      transform(doc, ret) {
+        delete ret.password;
+        delete ret.salt;
+        delete ret.__v;
+        delete ret.createdAt;
+        delete ret.updatedAt;
+      },
+    },
     timestamps: true,
   },
 );

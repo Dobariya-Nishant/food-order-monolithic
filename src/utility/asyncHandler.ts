@@ -4,7 +4,7 @@ type RequestHandler = (
   req: Request,
   res: Response,
   next: NextFunction,
-) => Promise<void>;
+) => Promise<any>;
 
 export function asyncHndler(requestHandler: RequestHandler) {
   return function fn(req: Request, res: Response, next: NextFunction) {
